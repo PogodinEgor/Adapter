@@ -1,0 +1,13 @@
+package com.example.emulationservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class EmulationServiceApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(EmulationServiceApplication.class, args);
+    }
+
+}
