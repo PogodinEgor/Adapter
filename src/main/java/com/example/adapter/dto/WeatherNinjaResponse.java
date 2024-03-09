@@ -15,9 +15,6 @@ import lombok.ToString;
 @ToString
 public class WeatherNinjaResponse {
 
-    /**
-     * Класс - DTO, для сообщения, получаемого из погодного сервиса
-     */
     @JsonProperty("cloud_pct")
     private Integer cloudPercentage;
     /**
