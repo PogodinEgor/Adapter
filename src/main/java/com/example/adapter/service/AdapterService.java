@@ -6,6 +6,7 @@ import com.example.adapter.dto.MsgB;
 
 import com.example.adapter.dto.WeatherNinjaResponse;
 import com.example.adapter.exception.NotConnectionWeatherApiException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +22,16 @@ import java.time.LocalDateTime;
  */
 @Service
 public class AdapterService {
+
+    /**
+     * Компонент для выполнения HTTP запросов. Используется для общения с внешними веб-сервисами.
+     */
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    public AdapterService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
     /**
      * Адрес погодного сервиса
      */
@@ -44,7 +55,7 @@ public class AdapterService {
      * @return WeatherNinjaResponse
      */
     public WeatherNinjaResponse getWeather (Coordinates coordinates){
-        RestTemplate restTemplate = new RestTemplate();
+
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(weatherUrl)
                 .queryParam("lat", coordinates.getLatitude())
