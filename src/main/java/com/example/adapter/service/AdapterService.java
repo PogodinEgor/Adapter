@@ -55,8 +55,6 @@ public class AdapterService {
      * @return WeatherNinjaResponse
      */
     public WeatherNinjaResponse getWeather (Coordinates coordinates){
-
-
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(weatherUrl)
                 .queryParam("lat", coordinates.getLatitude())
                 .queryParam("lon", coordinates.getLongitude());

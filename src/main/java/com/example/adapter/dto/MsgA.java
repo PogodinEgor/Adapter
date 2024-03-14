@@ -27,4 +27,13 @@ public class MsgA {
      */
     private  Coordinates coordinates;
 
+    /**
+     * Проверяет корректность сообщения.
+     * Сообщение считается некорректным, если оно пусто или содержит только пробельные символы.
+     * @return true, если сообщение некорректно, иначе false.
+     */
+    public boolean isIncorrect() {
+        return msg == null || msg.isBlank();
+    }
+
 }

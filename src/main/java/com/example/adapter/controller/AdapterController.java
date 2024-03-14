@@ -26,7 +26,7 @@ import java.net.UnknownHostException;
  */
 @RestController
 @RequestMapping("/api")
-@Tag(name = "Контроллер служайщий для отправки данных в сервис B",
+@Tag(name = "Контроллер служащий для отправки данных в сервис B",
         description = "Отправка данных в сервис B")
 public class AdapterController {
 
@@ -52,12 +52,12 @@ public class AdapterController {
      * @return статус отправки сообщения или объект содержащий ошибку невалидных данных
      */
     @Operation(summary = "Получение данные из сервиса A,\n" +
-            " обогощает их и погодного сервиса и отправляет в сервис B",
+            " обогащает их и погодного сервиса и отправляет в сервис B",
             description = "Метод принимает объект из сервиса A. Возвращает статус отправки сообщения или объект содержащий ошибку невалидных данных.")
     @PostMapping("/processWeather")
     public ResponseEntity<?> getWeatherData(@RequestBody MsgA msgA) {
-        if (isCorrectMessage(msgA)) {
-            throw new NotFoundMessageServicesException("Сообщение отсутствует!");
+        if (msgA == null || msgA.isIncorrect()) {
+            throw new NotFoundMessageServicesException("Сообщение отсутствует или некорректно!");
         }
 
         if (msgA.getLng() != Language.RU) {
@@ -76,16 +76,6 @@ public class AdapterController {
         sendToServiceB(msgB);
         return ResponseEntity.ok(HttpStatus.OK);
 
-    }
-
-    /**
-     * Метод для проверки на корректность сообщения поступаемого из сервиса A
-     *
-     * @param msgA - входящий объект из сервиса A
-     * @return boolean
-     */
-    private static boolean isCorrectMessage(MsgA msgA) {
-        return msgA == null || msgA.getMsg() == null || msgA.getMsg().isBlank() || msgA.getMsg().isEmpty();
     }
 
     /**
